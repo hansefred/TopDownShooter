@@ -17,6 +17,8 @@ namespace ComponentBasedGame.Model.GameObjects
 
             AddComponent(new DrawComponent(this, texture, new Color(255, 255, 255, 255)));
             AddComponent(new MovingComponent(this, speed, direction));
+            AddComponent(new ColliderComponent(this, [GameObjectType.Enemy], new Rectangle(0,0,32,32)));
+            AddComponent(new DestroyableComponent(this, 1));
         }
 
 

@@ -13,6 +13,7 @@ namespace ComponentBasedGame.Model.Components
         {
             _speed = speed;
             _direction = direction;
+            ComponentPriority = ComponentPriority.High;
         }
 
         public override Task Update(float frameTime)

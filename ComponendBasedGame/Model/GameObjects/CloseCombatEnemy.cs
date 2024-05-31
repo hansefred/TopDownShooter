@@ -20,7 +20,9 @@ namespace ComponentBasedGame.Model.GameObjects
                 AddComponent(new FollowGameObjectComponent(this, movingComp, target));
             }
 
-            AddComponent(new ColliderComponent(this, [],new Rectangle(0,0,32,32)));
+            AddComponent(new ColliderComponent(this, [GameObjectType.PlayerBullet],new Rectangle(0,0,32,32)));
+            AddComponent(new DestroyableComponent(this, 1));
+            
         }
     }
 }

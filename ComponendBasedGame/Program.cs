@@ -17,5 +17,6 @@ while (!Raylib.WindowShouldClose()) // Detect window close button or ESC key
     Raylib.EndBlendMode();
     Raylib.DrawFPS(10, 10);
     Raylib.EndDrawing();
+    Game.Instance.Cleanup();
 }
 Raylib.CloseWindow();

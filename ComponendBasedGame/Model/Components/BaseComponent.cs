@@ -10,9 +10,12 @@ namespace ComponentBasedGame.Model.Components
         protected BaseComponent(GameObject owner)
         {
             _owner = owner;
+            ComponentPriority = ComponentPriority.Low;
         }
 
         public GameObject Owner { get => _owner; }
+        public ComponentPriority ComponentPriority { get; protected set; }
+
         public abstract Task Update(float frameTime);
 
 

@@ -1,23 +1,19 @@
 ﻿using ComponentBasedGame.Model.Commands;
 using ComponentBasedGame.Model.GameObjects;
-using libc.eventbus.Types;
 using Raylib_cs;
 
 namespace ComponentBasedGame.Model.Components
 {
-    internal class ColliderComponent : BaseComponent, IEventHandler<CollideWithEvent>
+    internal class ColliderComponent : BaseComponent
     {
         private List<GameObjectType> _collideWith;
         private Rectangle _bounds;
 
         public Rectangle Bounds { get => _bounds; }
-
         public ColliderComponent(GameObject owner, List<GameObjectType> collideWith, Rectangle bounds) : base(owner)
         {
             _collideWith = collideWith;
             _bounds = bounds;
-
-            Game.Instance.EventBus.Subscribe<CollideWithEvent, ColliderComponent>(this);
         }
 
         public override async Task Update(float frameTime)
@@ -33,23 +29,17 @@ namespace ComponentBasedGame.Model.Components
                     var collider = checkEntities.ElementAt(a).Components.FirstOrDefault(o => o.GetType() == typeof(ColliderComponent));
                     if (collider is not null && collider is ColliderComponent foreignComp)
                     {
-                        if (Raylib.CheckCollisionRecs(_bounds,foreignComp.Bounds))
+                        //Need to check Position
+                        var foreignBounds = foreignComp.Bounds;
+                        foreignBounds.Position = checkEntities.ElementAt(a).Position;
+
+                        if (Raylib.CheckCollisionRecs(_bounds,foreignBounds))
                         {
                             await Game.Instance.EventBus.PublishAsync(new CollideWithEvent(Owner.ID, foreignComp.Owner.ID)); 
                         }
                     }
                 }
             }
-        }
-
-        public Task Handle(CollideWithEvent ev)
-        {
-            dsif (ev.foreign == Owner.ID)
-            {
-
-            }
-         
-            return Task.CompletedTask;
         }
     }
 }

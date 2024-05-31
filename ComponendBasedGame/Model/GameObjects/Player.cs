@@ -19,6 +19,7 @@ namespace ComponentBasedGame.Model.GameObjects
             AddComponent(new DrawComponent(this, Raylib.LoadTextureFromImage(img), new Color(255, 255, 255, 255)));
             AddComponent(new ControlComponent(this, 100, 1));
             AddComponent(new ColliderComponent(this, [GameObjectType.Enemy],new Rectangle(0,0, 32, 32)));
+            AddComponent(new DestroyableComponent(this, 1));
             Raylib.UnloadImage(img);
 
         }
