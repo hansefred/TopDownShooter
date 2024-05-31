@@ -45,7 +45,7 @@ namespace ComponentBasedGame.Model.Components
 
                 var img = Raylib.LoadImage("Resources/Texture/PlayerSheet.png");
                 img = Raylib.ImageFromImage(img, new Rectangle(0, 0, 32, 32));
-                Game.Instance.AddObject(new CloseCombatEnemy(Owner.Position, 100,3,destination,Raylib.LoadTextureFromImage(img)));
+                Game.Instance.AddObject(new CloseCombatEnemy(Owner.Position, 100,3,destination,Raylib.LoadTextureFromImage(img),player));
                 Raylib.UnloadImage(img);
                 _canSpawn = false;
             }

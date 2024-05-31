@@ -8,12 +8,17 @@ namespace ComponentBasedGame.Model.GameObjects
     internal class CloseCombatEnemy : GameObject
     {
 
-        public CloseCombatEnemy(Vector2 position, float speed, float scale, Vector2 destionation, Texture2D texture):base(position,0,scale)
+        public CloseCombatEnemy(Vector2 position, float speed, float scale, Vector2 destionation, Texture2D texture, GameObject? target):base(position,0,scale)
         {
             Type = GameObjectType.Enemy;
 
             AddComponent(new DrawComponent(this, texture, new Color(255, 255, 255, 255)));
-            AddComponent(new MovingComponent(this, speed, destionation));
+            var movingComp = new MovingComponent(this, speed, destionation);
+            AddComponent(movingComp);
+            if (target is not null)
+            {
+                AddComponent(new FollowGameObjectComponent(this, movingComp, target));
+            }
         }
     }
 }
