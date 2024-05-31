@@ -7,6 +7,7 @@ namespace ComponentBasedGame.Model.GameObjects
     {
         List<IComponent> _components;
 
+        public Guid ID { get; private set; } = Guid.NewGuid();
         public GameObjectType Type { get; set; }
         public List<IComponent> Components { get => _components; }
         public Vector2 Position { get; set; }

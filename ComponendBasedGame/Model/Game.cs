@@ -1,5 +1,5 @@
 ﻿using ComponentBasedGame.Model.GameObjects;
-using Mediator.Net;
+using libc.eventbus.System;
 using Raylib_cs;
 using System.Numerics;
 
@@ -9,17 +9,17 @@ namespace ComponentBasedGame.Model
     {
         private static Game? _instance;
         private readonly List<GameObject> _gameObjects = new List<GameObject>();
-        private IMediator _mediator;
+        private EventBus _eventBus;
         private static readonly object _lock = new object();
-        
-        
+
+        public EventBus EventBus    {get => _eventBus; }
+
+
 
         // Private constructor to prevent instantiation
         private Game()
         {
-            // Setup a mediator builder
-            var mediaBuilder = new MediatorBuilder();
-            _mediator = mediaBuilder.RegisterHandlers(typeof(Program).Assembly).Build();
+            _eventBus = new DefaultEventBus();
         }
 
         public static Game Instance
@@ -43,15 +43,17 @@ namespace ComponentBasedGame.Model
             _gameObjects.Add(gameObject);
         }
 
+
+        internal IEnumerable<GameObject> GetObjectFromType(GameObjectType type)
+        {
+            return _gameObjects.Where(x => x.Type == type);
+        }
+
         internal GameObject? GetFirstObjectFromType (GameObjectType type)
         {
             return _gameObjects.FirstOrDefault(x => x.Type == type);
         }
 
-        internal IMediator GetMediator()
-        {
-            return _mediator;
-        }
 
         public void Init()
         {
@@ -61,13 +63,13 @@ namespace ComponentBasedGame.Model
             Instance.AddObject(new EnemySpawner(new Vector2(100, 100), 10));
         }
 
-        public void Update(float frameTime)
+        public async Task Update(float frameTime)
         {
             for(int i = 0; i < _gameObjects.Count; i++)
             {
                 for(int j = 0; j < _gameObjects[i].Components.Count; j++)
                 {
-                    _gameObjects[i].Components[j].Update(frameTime);
+                   await _gameObjects[i].Components[j].Update(frameTime);
                 }
             }
         }

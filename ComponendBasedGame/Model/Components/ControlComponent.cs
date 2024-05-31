@@ -1,4 +1,5 @@
-﻿using ComponentBasedGame.Model.GameObjects;
+﻿using ComponentBasedGame.Helper;
+using ComponentBasedGame.Model.GameObjects;
 using Raylib_cs;
 
 namespace ComponentBasedGame.Model.Components
@@ -18,13 +19,7 @@ namespace ComponentBasedGame.Model.Components
             _shootSpeed = shootSpeed;
         }
 
-
-        public override void Init()
-        {
-
-        }
-
-        public override void Update(float frameTime)
+        public override Task Update(float frameTime)
         {
 
             var NewPosition = Owner.Position;
@@ -48,7 +43,7 @@ namespace ComponentBasedGame.Model.Components
 
 
             var mousePosition = Raylib.GetMousePosition();
-            Owner.Rotation = Convert.ToSingle(Math.Atan2(mousePosition.Y - Owner.Position.Y, mousePosition.X - Owner.Position.X)) * (180 / (float)Math.PI);
+            Owner.Rotation = PositionHelper.CalculateRotation(mousePosition, Owner.Position);
 
 
             if (_canShoot == false)
@@ -74,6 +69,8 @@ namespace ComponentBasedGame.Model.Components
 
                 _canShoot = false;
             }
+
+            return Task.CompletedTask;
         }
     }
 }

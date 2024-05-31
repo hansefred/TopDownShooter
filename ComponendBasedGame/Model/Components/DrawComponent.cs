@@ -16,13 +16,7 @@ namespace ComponentBasedGame.Model.Components
             _transperencyValue = transperencyValue;
         }
 
-        public override void Init()
-        {
-
-        }
-
-
-        public override void Update(float frameTime)
+        public override Task Update(float frameTime)
         {
             var position = Owner.Position;
             position.X += _texture.Width / 2;
@@ -35,6 +29,8 @@ namespace ComponentBasedGame.Model.Components
                 Owner.Rotation,
                 _transperencyValue);
 
+
+            return Task.CompletedTask;
 
         }
     }

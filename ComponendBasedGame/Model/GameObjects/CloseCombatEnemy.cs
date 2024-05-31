@@ -19,6 +19,8 @@ namespace ComponentBasedGame.Model.GameObjects
             {
                 AddComponent(new FollowGameObjectComponent(this, movingComp, target));
             }
+
+            AddComponent(new ColliderComponent(this, [],new Rectangle(0,0,32,32)));
         }
     }
 }

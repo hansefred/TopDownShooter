@@ -13,10 +13,7 @@ namespace ComponentBasedGame.Model.Components
         }
 
         public GameObject Owner { get => _owner; }
-
-        public abstract void Init();
-
-        public abstract void Update(float frameTime);
+        public abstract Task Update(float frameTime);
 
 
     }

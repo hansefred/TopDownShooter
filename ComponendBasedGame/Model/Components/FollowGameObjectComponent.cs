@@ -14,15 +14,14 @@ namespace ComponentBasedGame.Model.Components
             _target = target;
         }
 
-        public override void Init()
-        {
-
-        }
-
-        public override void Update(float frameTime)
+        public override Task Update(float frameTime)
         {
            var direction = PositionHelper.CalculateDirection(_target.Position,Owner.Position);
            _movingComponent.SetDirection(direction);
+
+            Owner.Rotation = PositionHelper.CalculateRotation(_target.Position, Owner.Position);
+
+            return Task.CompletedTask;
         }
 
     }

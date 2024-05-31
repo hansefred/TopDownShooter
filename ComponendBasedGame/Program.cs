@@ -13,7 +13,7 @@ while (!Raylib.WindowShouldClose()) // Detect window close button or ESC key
     Raylib.BeginDrawing();
     Raylib.ClearBackground(Color.SkyBlue);
     Raylib.BeginBlendMode(BlendMode.Multiplied);
-    Game.Instance.Update(Raylib.GetFrameTime());
+    await Game.Instance.Update(Raylib.GetFrameTime());
     Raylib.EndBlendMode();
     Raylib.DrawFPS(10, 10);
     Raylib.EndDrawing();

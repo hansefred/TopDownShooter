@@ -16,12 +16,7 @@ namespace ComponentBasedGame.Model.Components
             _spawnTimeSpan = spawnTimeSpan;
         }
 
-        public override void Init()
-        {
-
-        }
-
-        public override void Update(float frameTime)
+        public override Task Update(float frameTime)
         {
            if (_canSpawn == false)
             {
@@ -49,6 +44,8 @@ namespace ComponentBasedGame.Model.Components
                 Raylib.UnloadImage(img);
                 _canSpawn = false;
             }
+
+           return Task.CompletedTask;
         }
     }
 }

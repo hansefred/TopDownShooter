@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mediator.Net" Version="4.8.0" />
+    <PackageReference Include="libc.eventbus" Version="7.0.1" />
     <PackageReference Include="Raylib-cs" Version="6.0.0" />
   </ItemGroup>
 
