@@ -110,11 +110,12 @@ namespace ComponentBasedGame.Model
             {
                 _gameObjects.Remove(destroyedEvent);
             }
+            _markedForCleanup.Clear();
         }
 
         public Task Handle(GameObjectDestoryedEvent ev)
         {
-            _markedForCleanup.Add(_gameObjects.First(o => o.ID == ev.ID));
+            _markedForCleanup.Add(_gameObjects.First(o => o == ev.Source));
             return Task.CompletedTask;
         }
     }

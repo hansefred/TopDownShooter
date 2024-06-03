@@ -1,8 +1,9 @@
-﻿using libc.eventbus.Types;
+﻿using ComponentBasedGame.Model.GameObjects;
 
 namespace ComponentBasedGame.Model.Events
 {
-    record GameObjectDestoryedEvent (Guid ID) : IEvent
+    internal class GameObjectDestoryedEvent(GameObject source) : BaseEvent (source)
     {
+
     }
 }

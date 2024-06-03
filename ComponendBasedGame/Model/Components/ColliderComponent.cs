@@ -35,7 +35,7 @@ namespace ComponentBasedGame.Model.Components
 
                         if (Raylib.CheckCollisionRecs(_bounds,foreignBounds))
                         {
-                            await Game.Instance.EventBus.PublishAsync(new CollideWithEvent(Owner.ID, foreignComp.Owner.ID)); 
+                            await Game.Instance.EventBus.PublishAsync(new CollideWithEvent(Owner, foreignComp.Owner)); 
                         }
                     }
                 }

@@ -17,7 +17,7 @@ namespace ComponentBasedGame.Model.Components
 
         public Task Handle(CollideWithEvent ev)
         {
-            if (ev.self == Owner.ID)
+            if (ev.Source == Owner)
             {
                 _hitPoints--;
             }
@@ -29,7 +29,7 @@ namespace ComponentBasedGame.Model.Components
         {
             if (_hitPoints == 0)
             {
-                Game.Instance.EventBus.PublishAsync(new GameObjectDestoryedEvent(Owner.ID));
+                Game.Instance.EventBus.PublishAsync(new GameObjectDestoryedEvent(Owner));
             }
 
             return Task.CompletedTask;
